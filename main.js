@@ -1,3 +1,4 @@
+$(document).ready(function() {
 const form = document.querySelector('.js-form');
 form.addEventListener('submit', customSearch);
 const nextBtn = document.querySelector('.js-next');
@@ -20,7 +21,7 @@ async function fetchResults(searchQuery) {
 		console.log(responseJson);
 
 		displayResults(responseJson); // display results
-		cardBackground(responseJson) // display card
+		// cardBackground(responseJson) // display card
 
 	} catch(err) {
 		console.log(err);
@@ -38,55 +39,73 @@ function customSearch(e) {
 	fetchResults(searchQuery);
 }
 
+function Listener (e){		  
+	//delete logic
+	  if (e.target.className === 'delete-image') 
+	  console.log(e.target.parentNode.parentNode)	
+	  e.target.parentNode.remove();	
+	  e.target.parentNode.parentNode.remove();
+}
+
 function displayResults(responseJson) {
 
 	let randomNumber = 1 //should be user input
 
 	let imagesToDisplay = document.querySelector('.imagesToDisplay')
+
 	let singlePhotoContainer = document.createElement('div')
 	singlePhotoContainer.classList.add("image-container")
-
+	singlePhotoContainer.classList.add("draggable")
+	singlePhotoContainer.style.display = 'inline-block';	
+	
 	let deleteDiv = document.createElement('div')
-
-	let deleteWord = document.createElement('p')
+	deleteDiv.classList.add("resizable")
+	let deleteWord = document.createElement('span')
 	deleteWord.classList.add("delete-image")
 	deleteWord.innerText = "delete"
+
 	deleteWord.addEventListener('click', (e) => {
 		Listener(e);
-	  });
-
-
-	function Listener (e){
-	
-		//delete logic
-		if (e.target.className === 'delete-image') 
-			e.target.parentNode.remove();	
-	}
-
-
+	});	
+		
 	console.log(imagesToDisplay)
-
+	
 	for (i = 0; i < randomNumber; i++){
-
+		
 		let randomImage = responseJson.results[i].urls.small
-		console.log(randomImage)
-
-
-
+		console.log(randomImage)		
+		
 		let imageEl = document.createElement('img')
 		imageEl.src = responseJson.results[i].urls.small
-
+	
 		deleteDiv.append(deleteWord, imageEl)
+		deleteDiv.classList.add("element")
+		
 		singlePhotoContainer.append(deleteDiv)
 		imagesToDisplay.append(singlePhotoContainer)
 	}
-}
 	
-function cardBackground(responseJson) {	
-	const cardbackground = document.getElementById('iam-the-card');
-	console.log(cardbackground)
-
-	let randomImage = responseJson.results[5].urls.small
-	console.log(randomImage)
-	cardbackground.style.backgroundImage = `url(${randomImage})`
-}
+	var draggable = $('.draggable');
+	// var resizable = $('.resizable');
+	var element = $('.element');
+	// element.each( setRandomSize );
+	// element.each( setRandomPosition );
+				
+		draggable.draggable({
+			cursor: "move",
+			containment: "#background",
+			stack: ".element",
+		});
+		if(window.innerHeight > window.innerWidth){}
+	}
+	
+	function cardBackground(responseJson) {	
+		const cardbackground = document.getElementById('iam-the-card');
+		console.log(cardbackground)
+		
+		let randomImage = responseJson.results[5].urls.small
+		console.log(randomImage)
+		cardbackground.style.backgroundImage = `url(${randomImage})`
+	}
+	
+});

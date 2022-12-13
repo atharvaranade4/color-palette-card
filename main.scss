@@ -12,6 +12,13 @@
 	border-radius: 4px; /* Styling */
 }
 
+.element{
+	display: flex;
+	flex-direction: column;
+}
+
+
+
 .has-bg-img{
 	background-repeat: no-repeat;
 	background-position: center center;
