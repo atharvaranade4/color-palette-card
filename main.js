@@ -13,13 +13,14 @@ const apiKey = "QWHKA4I1zmxxYKZIPSYgadjNjfziHrZd99tcetDInJc";
 async function fetchResults(searchQuery) {
 	spinner.classList.remove('hidden');
 	try {
-    const endpoint = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=30&page=${currentPage}&client_id=${apiKey}`;
-    const response = await fetch(endpoint);
+		const endpoint = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=30&page=${currentPage}&client_id=${apiKey}`;
+		const response = await fetch(endpoint);
 
-    const responseJson = await response.json(); // result
+		const responseJson = await response.json(); // result
 		console.log(responseJson);
 
 		displayResults(responseJson); // display results
+		cardBackground(responseJson) // display card
 
 	} catch(err) {
 		console.log(err);
@@ -39,32 +40,53 @@ function customSearch(e) {
 
 function displayResults(responseJson) {
 
-  let imageToDisplay = document.querySelector('.imageToDisplay')
-  console.log(imageToDisplay)
-  let randomNumber = Math.floor(Math.random()* 10)
+	let randomNumber = 1 //should be user input
 
-  let allImages = responseJson.results[randomNumber]
-  let randomImage = allImages.urls.small
-  console.log(randomImage)
-  imageToDisplay.src = randomImage
+	let imagesToDisplay = document.querySelector('.imagesToDisplay')
+	let singlePhotoContainer = document.createElement('div')
+	singlePhotoContainer.classList.add("image-container")
 
-	const searchResults = document.querySelector('.search-results');
-	searchResults.textContent = '';
-	responseJson.results.forEach(result => {
-		const url = result.urls.small;
-		const unsplashLink = result.links.html;
-		const photographer = result.user.name;
-		const photographerPage = result.user.links.html;
-		searchResults.insertAdjacentHTML(
-			'beforeend',
-			`<div>
-				<a href="${unsplashLink}" target="_blank">
-					<div class="result-item" style="background-image: url(${url});"></div>
-				</a>
-				<p class="photographer-name">
-					<a href="${photographerPage}" target="_blank" style="color: black; text-decoration: none;">Photo by ${photographer}</a>
-				</p>
-			</div>`
-		);	
-	});
-};
+	let deleteDiv = document.createElement('div')
+
+	let deleteWord = document.createElement('p')
+	deleteWord.classList.add("delete-image")
+	deleteWord.innerText = "delete"
+	deleteWord.addEventListener('click', (e) => {
+		Listener(e);
+	  });
+
+
+	function Listener (e){
+	
+		//delete logic
+		if (e.target.className === 'delete-image') 
+			e.target.parentNode.remove();	
+	}
+
+
+	console.log(imagesToDisplay)
+
+	for (i = 0; i < randomNumber; i++){
+
+		let randomImage = responseJson.results[i].urls.small
+		console.log(randomImage)
+
+
+
+		let imageEl = document.createElement('img')
+		imageEl.src = responseJson.results[i].urls.small
+
+		deleteDiv.append(deleteWord, imageEl)
+		singlePhotoContainer.append(deleteDiv)
+		imagesToDisplay.append(singlePhotoContainer)
+	}
+}
+	
+function cardBackground(responseJson) {	
+	const cardbackground = document.getElementById('iam-the-card');
+	console.log(cardbackground)
+
+	let randomImage = responseJson.results[5].urls.small
+	console.log(randomImage)
+	cardbackground.style.backgroundImage = `url(${randomImage})`
+}

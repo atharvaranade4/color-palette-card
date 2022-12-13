@@ -7,31 +7,30 @@
 
 	<body>
 		<main>
-			<div class="container">
-				<h1 class="h1">Unsplash Photo Search</h1>
+			<section class="container">
+				<div class="h1">Build your Color-Palette Card!</div>
 				<form class="js-form">
 					<input type="text" class="search-input js-search-input" placeholder="Search high quality photos from Unsplash" autofocus>
 					<button type="submit" class="btn">Go</button>
 				</form>
 
-                <img class="imageToDisplay"/>
+                <div class="imagesToDisplay"></div>
 				<div class="result-stats js-result-stats"></div>
-
-				<div class="search-results js-search-results"></div>
-				<div class="pagination">
-					<button class="hidden prev-btn js-prev"><a href="#top" style="text-decoration: none; color: white;">Previous page</a></button>
-					<button class="hidden next-btn js-next"><a href="#top" style="text-decoration: none; color: white;">Next page</a></button>
-				</div>
-			</div>
+			</section>
 
 			<div class="spinner js-spinner hidden">
 				<div class="double-bounce1"></div>
 				<div class="double-bounce2"></div>
 			</div>
+
+			<!-- Setting background-image with JS -->
+			<div id="iam-the-card" class="card has-bg-img">
+				<span class="card__title">Using background-size on JS</span>
+			</div>
 		</main>
 
 		<footer class="footer">
-			<p>Built by <a href="https://github.com/toluagboola" class="github-link">Tolu Agboola</a></p>
+			<p>Built by <a href="https://github.com/toluagboola" class="github-link">Atharva Ranade</a></p>
 		</footer>
 
 		<script type="text/javascript" src="main.js"></script>

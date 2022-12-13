@@ -1,3 +1,26 @@
+.imagesToDisplay{
+	padding-top: 3rem;
+}
+
+.card{
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	
+	width: 300px; /* Box dimensions */
+	height: 400px;	
+	border-radius: 4px; /* Styling */
+}
+
+.has-bg-img{
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	opacity: 20%;
+	filter: blur(10px);
+	-webkit-filter: blur(10px);
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
