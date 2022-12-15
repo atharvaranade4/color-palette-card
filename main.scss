@@ -1,22 +1,86 @@
-.imagesToDisplay{
-	padding-top: 3rem;
+// styles for HTML
+
+.main-container{
+	max-width: 300rem;
+	margin: auto;
+	text-align: center;
+
 }
 
+.imagesToDisplay{
+	height: 20rem;
+	width: auto;
+}
+.form{
+	display: flex;
+	flex-direction: column;	
+}
+.fillable-form{
+	display: flex;
+	justify-content: space-evenly;
+	width: auto;
+	padding: 3rem 3rem 3rem 3rem;
+	background-color: rgb(235, 235, 235);
+}
 .card{
 	position: relative;
 	overflow: hidden;
 	display: flex;
-	
-	width: 300px; /* Box dimensions */
-	height: 400px;	
+	flex-direction: column;
+	width: 220px; /* Box dimensions */
+	height: 280px;	
 	border-radius: 4px; /* Styling */
 }
-
-.element{
+.btn-canvas{
 	display: flex;
 	flex-direction: column;
 }
+.canvas-container{
+	display: flex;
+	padding-top: 3rem
+}
+.canvas{
+	width: 100rem;
+	height: 120rem;
+}
+.color-toggle{
+	display: flex;
+	flex-direction: column;
+	padding: 10rem 3rem 3rem 3rem;
+	gap: 1rem;
+	background-color: rgb(242, 242, 242);
+}
 
+.button {
+	border: none;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 4px 2px;
+	cursor: pointer;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	border: 1px solid rgb(149, 149, 149)
+  }
+  
+  .button1 {background-color: #faf0dc};
+  .button2 {background-color: 4px;}
+  .button3 {background-color: 8px;}
+  .button4 {background-color: 12px;}
+  .button5 {background-color: 100%;}
+
+
+
+
+
+// styles for JS
+.element{
+
+}
 
 
 .has-bg-img{
@@ -27,28 +91,25 @@
 	filter: blur(10px);
 	-webkit-filter: blur(10px);
 }
+.delete-image{
+}
+
+.element {
+	display: flex;
+	flex-direction: column;
+    :hover {
+      .delete-image {
+        display: block;
+      }
+    }
+}
+
+
+
 
 html {
   font-size: 62.5%;
   box-sizing: border-box;
-}
-
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
-body {
-	font-family: 'Lato', sans-serif;
-}
-
-.container {
-	width: 100%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 30px 30px;
-	text-align: center;
 }
 
 .h1 {
@@ -68,8 +129,9 @@ body {
 	width: 60px;
 	height: 30px;
 	color: white;
-	background: #ff0000;
+	background: #404040;
 	border: none;
+	cursor: pointer 
 }
 
 button {
@@ -96,12 +158,6 @@ button:focus {
 	font-size: 1.5em;
 }
 
-.search-results {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-gap: 20px;
-	padding: 25px;
-}
 
 .result-item {
 	width: 250px;
