@@ -4,7 +4,10 @@
 	max-width: 300rem;
 	margin: auto;
 	text-align: center;
+}
 
+#example-container{
+	background-color: rgb(124, 121, 116);
 }
 
 .imagesToDisplay{
@@ -15,12 +18,13 @@
 	display: flex;
 	flex-direction: column;	
 }
-.fillable-form{
+#connect-form{
 	display: flex;
 	justify-content: space-evenly;
 	width: auto;
 	padding: 3rem 3rem 3rem 3rem;
 	background-color: rgb(235, 235, 235);
+	margin:0
 }
 .card{
 	position: relative;

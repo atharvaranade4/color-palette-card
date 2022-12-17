@@ -15,7 +15,7 @@
 			</form>			
 			<section class = "canvas-container">
 				<div class = "form">
-					<div class="fillable-form">
+					<form id="connect-form" action="">
 						<label for="title">Title:</label>
 						<input
 						id="title"
@@ -28,11 +28,11 @@
 						class="form-control validate-input"
 						type="text"
 						/>
-						<input class="btn" type="submit" value="Save"/>
-					</div>
-					<div class = "search-results canvas button1">
-						<div class="imagesToDisplay"></div>
-					</div>
+						<input class="savebtn" type="submit" value="Save"/>
+					</form>					
+						<div class = "search-results canvas button1">
+							<div class="imagesToDisplay"></div>
+						</div>
 				</div>
 				<div class = color-toggle>
 					<button class="button button1"></button>
@@ -40,6 +40,12 @@
 					<button class="button button3"></button>
 					<button class="button button4"></button>
 					<button class="button button5"></button>
+					<div id="example-notice">
+						<div class="container">
+						  <h3>INSTRUCTIONS</h3>
+						  <p>Toggle canvas color here</p>
+						</div>
+					</div>
 				</div>
 			</section>
 			<div class="spinner js-spinner hidden">
