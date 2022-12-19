@@ -1,68 +1,82 @@
 <html>
 	<head>
-		<title>Unsplash Photo Search App</title>
+		<title>Build Mood-Board App</title>
 		<link rel="stylesheet" href="main.scss">
 		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 	</head>
 
-	<body>
-		<div class="main-container">
-			<div class="h1">Build your MoodBoard</div>                
-			<div class="result-stats js-result-stats"></div>			
-			<form class="search">
-				<input type="text" class="search-input js-search-input" placeholder="Search high quality photos from Unsplash" autofocus>
-				<button type="submit" class="btn">Go</button>
-			</form>			
-			<section class = "canvas-container">
-				<div class = "form">
-					<form id="connect-form" action="">
+	<div class="page-container">
+		<div class="heading">Build your MoodBoard</div>                
+		<form class="search">
+			<input 
+				type="text" 
+				class="search-input js-search-input" 
+				placeholder="Search high quality photos from Unsplash" 
+			autofocus>
+			<button type="submit" class="btn">Search</button>
+		</form>
+		<section class = "canvas-container">
+			<div class= "canvas">
+				<div class="instruction">
+					<p>**INSTRUCTIONS**</p>
+					<p>Search images above to import</p>
+					<p>Images can be dragged and deleted</p>
+				</div>
+				<div class="imagesToDisplay"></div>
+			</div>
+			<div class = "form">
+				<form id="connect-form" action="">
+					<div class="title-container">
 						<label for="title">Title:</label>
 						<input
 						id="title"
 						class="form-control validate-input"
 						type="text"						  
 						/>
+					</div>
+					<div class="description-container">
 						<label for="description">Description:</label>
 						<input
 						id="description"
 						class="form-control validate-input"
 						type="text"
+						size="100"
 						/>
+					</div>
+					<div>
 						<input class="savebtn" type="submit" value="Save"/>
-					</form>					
-						<div class = "canvas">
-							<div class="imagesToDisplay"></div>
-						</div>
-				</div>
+					</div>
+				</form>
 				<div class = color-toggle>
 					<button class="button" id="button1"></button>
 					<button class="button" id="button2"></button>
 					<button class="button" id="button3"></button>
 					<button class="button" id="button4"></button>
 					<button class="button" id="button5"></button>
-					<div id="instructions">
-						<div class="container">
-						  <h3>INSTRUCTIONS</h3>
-						  <p>Toggle canvas color here</p>
-						</div>
+					<button class="button" id="button6"></button>
+					<div class="instruction">
+						<p>Toggle canvas color here</p>
 					</div>
 				</div>
-			</section>
-			<div class="spinner js-spinner hidden">
-			<div class="double-bounce1"></div>
-			<div class="double-bounce2"></div>
-		</div>
-		
-		<!-- Setting background-image with JS -->
-		<div id="iam-the-card" class="card has-bg-img">
-			<span class="card__title">Using background-size on JS</span>
-		</div>
-		
-		<footer class="footer">
-			<p>Built by <a href="https://github.com/toluagboola" class="github-link">Atharva Ranade</a></p>
-		</footer>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="main.js"></script>
-	</body>
-	</html>
+			</div>
+		</section>
+		<section>
+			<div class ="examples">
+				<p>Mood-Board Examples</p>
+				<div class="example-images">
+					<img src="assets/Example_1.JPG" alt="forest" height="300px">
+					<img src="assets/Example_2.JPG" alt="forest" height="300px">
+					<img src="assets/Example_3.JPG" alt="forest" height="300px">
+				</div>
+			</div>
+		</section>
+	</div>		
+	<div class="footer">
+		<p>UW Coursework Final-Project I</p>
+		<p>Built by <a href="https://github.com/atharvaranade4" class="github-link">Atharva Ranade</a></p>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="main.js"></script>
+</html>

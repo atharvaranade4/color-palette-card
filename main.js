@@ -5,12 +5,13 @@ let currentPage = 1;
 let searchQuery;
 let randomImage;
 let randomImageArr = [];
+let saveBtn = document.querySelector('.savebtn')
 console.log(typeof randomImageArr)
 
-const apiKey = "QWHKA4I1zmxxYKZIPSYgadjNjfziHrZd99tcetDInJc";
+// const apiKey = process.env.apiKey
+const apiKey = "QWHKA4I1zmxxYKZIPSYgadjNjfziHrZd99tcetDInJc"
 
 async function fetchResults(searchQuery) {
-	spinner.classList.remove('hidden');
 	try {
 		const endpoint = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=30&page=${currentPage}&client_id=${apiKey}`;
 		const response = await fetch(endpoint);
@@ -24,7 +25,7 @@ async function fetchResults(searchQuery) {
 		console.log(err);
 		alert('Failed to search Unsplash');
 	}
-	spinner.classList.add('hidden'); // add timeout function
+
 } 
 
 function customSearch(e) {
@@ -81,7 +82,7 @@ function displayResults(responseJson) {
 	});	
 	
 	
-	deleteDiv.append(deleteWord, imageEl)
+	deleteDiv.append(imageEl, deleteWord)
 	deleteDiv.classList.add("element")
 	
 	singlePhotoContainer.append(deleteDiv)
@@ -94,11 +95,8 @@ function displayResults(responseJson) {
 
 	// remove url from array
 	let deleteUrl = document.querySelector(".delete-image")
-	console.log(deleteUrl.nextSibling.src)
-
-
 	deleteUrl.addEventListener("click", () => {
-		let removeUrl = deleteUrl.nextSibling.src
+		let removeUrl = deleteUrl.previousSibling.src
 		randomImageArr = randomImageArr.filter(e => e !== removeUrl);
 		console.log(randomImageArr)
 
@@ -106,13 +104,6 @@ function displayResults(responseJson) {
 		for (i=0; i<randomImageArr.length; i++){
 			console.log(randomImageArr[i])
 		};
-	})
-	
-
-	// Add to local storage
-	saveBtn = document.querySelector('.savebtn')
-	saveBtn.addEventListener("click", () => {
-		let storage = localStorage.setItem(searchQuery, JSON.stringify(randomImageArr))
 	})	
 	
 	$(document).ready(function() {
@@ -150,12 +141,17 @@ function checkValidation(e){
 		} else 
 		{
 			currentElement.classList.remove('invalid')
+			// Add to local storage
+			saveBtn.addEventListener("click", () => {
+				localStorage.setItem(title.value, JSON.stringify(randomImageArr))
+			})
 		}
 	}
 }
 
 title.addEventListener('input', checkValidation)
 description.addEventListener('input', checkValidation)
+
 validationForm.addEventListener("submit", (event) => {
 	allValid = currentElementIsValid
 	console.log(allValid)
@@ -172,44 +168,26 @@ validationForm.addEventListener("submit", (event) => {
 
 // set timeout for instructions
 document.addEventListener("DOMContentLoaded", function(){
-	const notice = document.getElementById("instructions")
-	
+	const notice = document.querySelectorAll(".instruction")
+	console.log(notice)
     setTimeout(function() {
-		notice.style.display = "none"
+		notice.forEach(notice => notice.style.display = "none")
 	},
-	5000
+	15000
     );
 })
 
-let button
 let canvasBackground = document.querySelector(".canvas")
-console.log(canvasBackground)
-
-for (i=1; i<=5; i++){
-	console.log(`button${[i]}`)
-}
-
-// let button1 = document.querySelector("#button1")
-// console.log(button1)
-// button1.addEventListener("click", () => {
-// 	canvasBackground.setAttribute('id', 'button1')
-// })
+document.querySelector(`#button1`).addEventListener("click", () => {
+	canvasBackground.setAttribute('id', 'button1')
+	console.log(button1)
+})
 
 
-for (i=1; i<=5; i++){
-	let button = document.querySelector(`#button${[i]}`)
-	console.log(button)
-	button.addEventListener("click", () => {
-		canvasBackground.setAttribute('id', `button${[i]}`)
+for (let index = 1; index <= 6; index++){
+	console.log(index)
+	document.querySelector(`#button${index}`).addEventListener("click", () => {
+		canvasBackground.setAttribute('id', `button${index}`)
+		console.log(`button${index}`)
 	})
 }
-
-
-// function cardBackground(responseJson) {	
-	// 	const cardbackground = document.getElementById('iam-the-card');
-	// 	console.log(cardbackground)
-	
-	// 	let randomImage = responseJson.results[5].urls.thumbnail
-	// 	console.log(randomImage)
-	// 	cardbackground.style.backgroundImage = `url(${randomImage})`
-	// }
