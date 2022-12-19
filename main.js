@@ -5,9 +5,9 @@ let currentPage = 1;
 let searchQuery;
 let randomImage;
 let randomImageArr = [];
-console.log(randomImageArr)
+console.log(typeof randomImageArr)
 
-const apiKey = process.env.apiKey;
+const apiKey = "QWHKA4I1zmxxYKZIPSYgadjNjfziHrZd99tcetDInJc";
 
 async function fetchResults(searchQuery) {
 	spinner.classList.remove('hidden');
@@ -39,8 +39,6 @@ function Listener (e){
 	//delete logic
 	if (e.target.className === 'delete-image') 
 	e.target.parentNode.remove();
-	
-	e.target.style="position:absolute()";	
 }
 
 function displayResults(responseJson) {
@@ -48,6 +46,7 @@ function displayResults(responseJson) {
 	let randomNumber = 1 //should be user input
 	
 	let imagesToDisplay = document.querySelector('.imagesToDisplay')
+	console.log(imagesToDisplay)
 	
 	let singlePhotoContainer = document.createElement('div')
 	singlePhotoContainer.classList.add("image-container")
@@ -63,19 +62,14 @@ function displayResults(responseJson) {
 	deleteWord.addEventListener('click', (e) => {
 		Listener(e);
 	});
-	console.log(imagesToDisplay)
 	
 	let resultLen = responseJson.results.length
 	let randomResult = Math.floor(Math.random()*resultLen)		
 	console.log(randomResult)
 	
 	randomImage = responseJson.results[randomResult].urls.small
-	console.log(randomImage)
-	randomImageArr.push(randomImage)
-	for (i=0; i<randomImageArr.length; i++){
-		console.log(randomImageArr[i])
-	};
-
+	// console.log(randomImage)
+	
 	let imageEl = document.createElement('img')
 	imageEl.width = (Math.random()+0.50)*150
 	console.log(imageEl.width)
@@ -93,6 +87,34 @@ function displayResults(responseJson) {
 	singlePhotoContainer.append(deleteDiv)
 	imagesToDisplay.prepend(singlePhotoContainer)
 	
+	// push url to array
+	randomImageArr.push(randomImage)
+	console.log(randomImageArr)
+	console.log(typeof randomImageArr)
+
+	// remove url from array
+	let deleteUrl = document.querySelector(".delete-image")
+	console.log(deleteUrl.nextSibling.src)
+
+
+	deleteUrl.addEventListener("click", () => {
+		let removeUrl = deleteUrl.nextSibling.src
+		randomImageArr = randomImageArr.filter(e => e !== removeUrl);
+		console.log(randomImageArr)
+
+		// print array
+		for (i=0; i<randomImageArr.length; i++){
+			console.log(randomImageArr[i])
+		};
+	})
+	
+
+	// Add to local storage
+	saveBtn = document.querySelector('.savebtn')
+	saveBtn.addEventListener("click", () => {
+		let storage = localStorage.setItem(searchQuery, JSON.stringify(randomImageArr))
+	})	
+	
 	$(document).ready(function() {
 		var draggable = $('.draggable');
 		// var resizable = $('.resizable');
@@ -105,7 +127,7 @@ function displayResults(responseJson) {
 			stack: ".draggable element",
 		});
 	})
-
+	
 }		
 
 // Add event listeners
@@ -119,8 +141,8 @@ function checkValidation(e){
 	let currentElement = e.target
 	currentElement.setCustomValidity("");
 	if (currentElement.id === 'title' ||
-		currentElement.id === 'description') {
-			currentElementIsValid = currentElement.value.length >= 3
+	currentElement.id === 'description') {
+		currentElementIsValid = currentElement.value.length >= 3
 		if(!currentElementIsValid) {
 			currentElement.classList.add('invalid')
 			currentElement.setCustomValidity("Please use atleast 3 characters")
@@ -142,7 +164,7 @@ validationForm.addEventListener("submit", (event) => {
 		alert('Please enter name and description before saving!')
 		event.preventDefault()
 	} else {
-		console.log('Successfully updated socal-storage!')
+		console.log('Successfully updated local-storage!')
 		event.preventDefault()
 	}		
 });
@@ -150,34 +172,44 @@ validationForm.addEventListener("submit", (event) => {
 
 // set timeout for instructions
 document.addEventListener("DOMContentLoaded", function(){
-    const notice = document.getElementById("example-notice")
-
+	const notice = document.getElementById("instructions")
+	
     setTimeout(function() {
-        notice.style.display = "none"
-        },
-        10000
+		notice.style.display = "none"
+	},
+	5000
     );
 })
 
-//Add to local storage
-saveBtn = document.querySelector('.savebtn')
-saveBtn.addEventListener("click", () => {
-	let storage = localStorage.setItem(searchQuery, JSON.stringify(randomImageArr))
-	console.log(storage)
-})
+let button
+let canvasBackground = document.querySelector(".canvas")
+console.log(canvasBackground)
 
-//delete logic
-let deleteUrl = document.getElementsByClassName("delete-image")
-console.log(deleteUrl)
-deleteUrl.addEventListener("click", () => {
-	
-})
-	
+for (i=1; i<=5; i++){
+	console.log(`button${[i]}`)
+}
+
+// let button1 = document.querySelector("#button1")
+// console.log(button1)
+// button1.addEventListener("click", () => {
+// 	canvasBackground.setAttribute('id', 'button1')
+// })
+
+
+for (i=1; i<=5; i++){
+	let button = document.querySelector(`#button${[i]}`)
+	console.log(button)
+	button.addEventListener("click", () => {
+		canvasBackground.setAttribute('id', `button${[i]}`)
+	})
+}
+
+
 // function cardBackground(responseJson) {	
-// 	const cardbackground = document.getElementById('iam-the-card');
-// 	console.log(cardbackground)
+	// 	const cardbackground = document.getElementById('iam-the-card');
+	// 	console.log(cardbackground)
 	
-// 	let randomImage = responseJson.results[5].urls.thumbnail
-// 	console.log(randomImage)
-// 	cardbackground.style.backgroundImage = `url(${randomImage})`
-// }
+	// 	let randomImage = responseJson.results[5].urls.thumbnail
+	// 	console.log(randomImage)
+	// 	cardbackground.style.backgroundImage = `url(${randomImage})`
+	// }

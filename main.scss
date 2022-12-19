@@ -56,7 +56,6 @@
 }
 
 .button {
-	border: none;
 	color: white;
 	padding: 10px;
 	text-align: center;
@@ -71,21 +70,17 @@
 	border: 1px solid rgb(149, 149, 149)
   }
   
-  .button1 {background-color: #faf0dc};
-  .button2 {background-color: 4px;}
-  .button3 {background-color: 8px;}
-  .button4 {background-color: 12px;}
-  .button5 {background-color: 100%;}
+  #button1 {background-color: #f0e5ee}
+  #button2 {background-color: #e5d0e2}
+  #button3 {background-color: #eeeeee}
+  #button4 {background-color: #e9e6df}
+  #button5 {background-color: #f1f5e7}
 
 
 
 
 
 // styles for JS
-.element{
-
-}
-
 
 .has-bg-img{
 	background-repeat: no-repeat;
@@ -144,9 +139,9 @@ button {
 	font-family: 'Lato', sans-serif;
 }
 
-button:hover {
-	background: #e60000;
-}
+// button:hover {
+// 	background: #e60000;
+// }
 
 button:focus {
 	outline: none;
