@@ -1,38 +1,31 @@
 const search = document.querySelector('.search');
-search.addEventListener('submit', customSearch);
-const spinner = document.querySelector('.js-spinner');
-let currentPage = 1;
 let searchQuery;
 let randomImage;
 let randomImageArr = [];
 let saveBtn = document.querySelector('.savebtn')
-console.log(typeof randomImageArr)
 
-// const apiKey = process.env.apiKey
-const apiKey = "QWHKA4I1zmxxYKZIPSYgadjNjfziHrZd99tcetDInJc"
+// const apiKey = // Paste API key
 
+search.addEventListener('submit', customSearch);
 async function fetchResults(searchQuery) {
 	try {
+		let currentPage = randomIntFromInterval(0, 2)
 		const endpoint = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=30&page=${currentPage}&client_id=${apiKey}`;
 		const response = await fetch(endpoint);
 		
-		const responseJson = await response.json(); // result
-		console.log(responseJson);
-		
+		const responseJson = await response.json(); // result	
 		displayResults(responseJson); // display results
 		
 	} catch(err) {
 		console.log(err);
 		alert('Failed to search Unsplash');
 	}
-
 } 
 
 function customSearch(e) {
 	e.preventDefault();
 	const inputValue = document.querySelector('.js-search-input').value;
 	searchQuery = inputValue.trim();
-	console.log(searchQuery);
 	fetchResults(searchQuery);
 }
 
@@ -43,11 +36,8 @@ function Listener (e){
 }
 
 function displayResults(responseJson) {
-	
-	let randomNumber = 1 //should be user input
-	
+		
 	let imagesToDisplay = document.querySelector('.imagesToDisplay')
-	console.log(imagesToDisplay)
 	
 	let singlePhotoContainer = document.createElement('div')
 	singlePhotoContainer.classList.add("image-container")
@@ -66,22 +56,16 @@ function displayResults(responseJson) {
 	
 	let resultLen = responseJson.results.length
 	let randomResult = Math.floor(Math.random()*resultLen)		
-	console.log(randomResult)
 	
 	randomImage = responseJson.results[randomResult].urls.small
-	// console.log(randomImage)
 	
 	let imageEl = document.createElement('img')
 	imageEl.width = (Math.random()+0.50)*150
-	console.log(imageEl.width)
 	imageEl.src = responseJson.results[randomResult].urls.small
 	imageEl.addEventListener('click', (e) => {
-		console.log(e.target)
 		e.target.style="z-index:1";
-		console.log(e.target)
 	});	
-	
-	
+		
 	deleteDiv.append(imageEl, deleteWord)
 	deleteDiv.classList.add("element")
 	
@@ -90,27 +74,23 @@ function displayResults(responseJson) {
 	
 	// push url to array
 	randomImageArr.push(randomImage)
-	console.log(randomImageArr)
-	console.log(typeof randomImageArr)
 
 	// remove url from array
 	let deleteUrl = document.querySelector(".delete-image")
 	deleteUrl.addEventListener("click", () => {
 		let removeUrl = deleteUrl.previousSibling.src
 		randomImageArr = randomImageArr.filter(e => e !== removeUrl);
-		console.log(randomImageArr)
 
 		// print array
-		for (i=0; i<randomImageArr.length; i++){
-			console.log(randomImageArr[i])
-		};
+		// for (i=0; i<randomImageArr.length; i++){
+		// 	console.log(randomImageArr[i])
+		// };
 	})	
 	
+	//image draggable logic using jQuery
 	$(document).ready(function() {
 		var draggable = $('.draggable');
-		// var resizable = $('.resizable');
 		var element = $('.element');
-		// element.each( setRandomPosition );
 		
 		draggable.draggable({
 			cursor: "move",
@@ -152,9 +132,10 @@ function checkValidation(e){
 title.addEventListener('input', checkValidation)
 description.addEventListener('input', checkValidation)
 
+// add Validation
 validationForm.addEventListener("submit", (event) => {
 	allValid = currentElementIsValid
-	console.log(allValid)
+	// console.log(allValid)
 	
 	if(!allValid) {
 		alert('Please enter name and description before saving!')
@@ -169,7 +150,6 @@ validationForm.addEventListener("submit", (event) => {
 // set timeout for instructions
 document.addEventListener("DOMContentLoaded", function(){
 	const notice = document.querySelectorAll(".instruction")
-	console.log(notice)
     setTimeout(function() {
 		notice.forEach(notice => notice.style.display = "none")
 	},
@@ -177,17 +157,14 @@ document.addEventListener("DOMContentLoaded", function(){
     );
 })
 
+// change canvas background
 let canvasBackground = document.querySelector(".canvas")
-document.querySelector(`#button1`).addEventListener("click", () => {
-	canvasBackground.setAttribute('id', 'button1')
-	console.log(button1)
-})
-
-
 for (let index = 1; index <= 6; index++){
-	console.log(index)
 	document.querySelector(`#button${index}`).addEventListener("click", () => {
 		canvasBackground.setAttribute('id', `button${index}`)
-		console.log(`button${index}`)
 	})
+}
+
+function randomIntFromInterval(min, max) {
+	return Math.floor(Math.random() * (max - min + 1) + min)
 }
